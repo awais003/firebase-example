@@ -24,4 +24,15 @@ class AuthApi {
       }
     }
   }
+
+  // RESET PASSWORD
+  Future<void> resetPassword(String email) async  {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      if (e.message != null) {
+        return Future.error(e.message!);
+      }
+    }
+  }
 }

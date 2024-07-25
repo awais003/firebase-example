@@ -49,4 +49,43 @@ class Utils {
     // show snack bar
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
+  // SHOW MESSAGE DIALOG
+  static void showMessageDialog(BuildContext context, String message) {
+    Dialog dialog = Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      child: Padding(
+        padding: const EdgeInsets.all(15),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              message,
+            ),
+            const SizedBox(height: 15,),
+            Align(
+              alignment: Alignment.centerRight,
+              child: InkWell(
+                onTap: () {
+                  // on OK button pressed
+                  // pop the dialog
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  "Ok",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blue
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    // show dialog
+    showDialog(context: context, builder: (context) => dialog, barrierDismissible: false);
+  }
 }

@@ -1,5 +1,6 @@
 
 import 'package:firebase_example/data/api/auth_api.dart';
+import 'package:firebase_example/pages/forgot_password_page.dart';
 import 'package:firebase_example/pages/home_page.dart';
 import 'package:firebase_example/utils/utils.dart';
 import 'package:firebase_example/widgets/app_button.dart';
@@ -76,7 +77,6 @@ class _LoginPageState extends State<LoginPage> {
                     error: _emailError,
                   ),
                   const SizedBox(height: 20,),
-                  // password field
                   AppPasswordField(
                     controller: _passwordEditingController,
                     label: "Password",
@@ -94,7 +94,27 @@ class _LoginPageState extends State<LoginPage> {
                       });
                     },
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 15,),
+                  // forgot password
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: InkWell(
+                      onTap: () {
+                        // on forgot password pressed
+                        // navigate to ForgotPasswordPage
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage(),));
+                      },
+                      child: const Text(
+                        "Forgot Password",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30,),
                   // login button
                   AppButton(
                     onPressed: () {
@@ -106,6 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                       }
                     },
                     label: "Login",
+                    width: double.maxFinite,
                     isInProgress: _isLoginInProgress,
                   ),
                 ],
