@@ -2,6 +2,7 @@
 import 'package:firebase_example/data/api/auth_api.dart';
 import 'package:firebase_example/pages/forgot_password_page.dart';
 import 'package:firebase_example/pages/home_page.dart';
+import 'package:firebase_example/pages/signup_page.dart';
 import 'package:firebase_example/utils/utils.dart';
 import 'package:firebase_example/widgets/app_button.dart';
 import 'package:firebase_example/widgets/app_password_field.dart';
@@ -129,7 +130,32 @@ class _LoginPageState extends State<LoginPage> {
                     width: double.maxFinite,
                     isInProgress: _isLoginInProgress,
                   ),
-                ],
+                  const SizedBox(height: 20,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account? ",
+                        style: TextStyle(
+                          color: Colors.black54
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // on signup pressed
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => SignupPage(),));
+                        },
+                        child: const Text(
+                          "Signup",
+                          style: TextStyle(
+                              color: Colors.black,
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+               ],
               ),
             ),
           ),

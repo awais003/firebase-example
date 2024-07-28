@@ -35,4 +35,20 @@ class AuthApi {
       }
     }
   }
+
+  // SIGNUP
+  Future<void> signup(String email, String password) async {
+    try {
+      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.message != null) {
+        return Future.error(e.message!);
+      }
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
 }
