@@ -2,6 +2,7 @@
 import 'package:firebase_example/data/api/auth_api.dart';
 import 'package:firebase_example/pages/forgot_password_page.dart';
 import 'package:firebase_example/pages/home_page.dart';
+import 'package:firebase_example/pages/phone_auth_page.dart';
 import 'package:firebase_example/pages/signup_page.dart';
 import 'package:firebase_example/utils/utils.dart';
 import 'package:firebase_example/widgets/app_button.dart';
@@ -39,14 +40,14 @@ class _LoginPageState extends State<LoginPage> {
         body: Center(
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               child: Column(
                 children: [
                   // app icon image
                   Image.asset(
                     "assets/images/app_icon.jpg",
-                    width: 150,
-                    height: 150,
+                    width: 120,
+                    height: 120,
                   ),
                   const SizedBox(height: 30,),
                   const Text(
@@ -152,8 +153,27 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.bold
                           ),
                         ),
-                      )
+                      ),
                     ],
+                  ),
+                  const SizedBox(height: 10,),
+                  const Text(
+                    "Or",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  // login with phone button
+                  AppButton(
+                    onPressed: () {
+                      // on phone auth button pressed
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => PhoneAuthPage(),));
+                    },
+                    label: "Login with Phone",
+                    width: double.maxFinite,
+                    backgroundColor: Colors.green,
                   ),
                ],
               ),

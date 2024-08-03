@@ -51,4 +51,42 @@ class AuthApi {
       return Future.error(e.toString());
     }
   }
+
+  // VERIFY PHONE NUMBER
+  Future<void> verifyPhoneNumber(String phoneNumber, {Function(String verificationId)? onCodeSent,
+    Function(String error)? onError}) async {
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {
+        if (onError != null) {
+          onError(e.message!);
+        }
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        if (onCodeSent != null) {
+          onCodeSent(verificationId);
+        }
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        if (onError != null) {
+          onError("Code retrieval timeout");
+        }
+      },
+    );
+  }
+
+  // VERIFY OTP
+  Future<void> verifyOtp(String verificationId, String code) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verificationId,
+        smsCode: code);
+    try {
+      await _auth.signInWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      if (e.message != null) {
+        return Future.error(e.message!);
+      }
+    }
+  }
+
 }
